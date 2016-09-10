@@ -5,12 +5,16 @@ import pickle
 import argparse
 import random
 
+__minwords__ = 4
+__maxwords__ = 8
 parser = argparse.ArgumentParser()
 parser.add_argument("-w", "--words", type=int, help="number of words to print")
 
 args = parser.parse_args()
 words = args.words
-
+r = random.SystemRandom()
+if words is None:
+	words = r.randint(__minwords__, __maxwords__);
 num = words * 5
 
 # parameterDict = {'num': 35, 'min':1, 'max':6, 'col': 5, 'base':10,
@@ -22,7 +26,6 @@ num = words * 5
 # response = conn.getresponse()
 # rolls = response.read()
 
-r = random.SystemRandom()
 # Create words number of 5-digit random dice rolls
 # For example, if words = 5:
 # [56551,
@@ -49,7 +52,3 @@ print '\nTotal characters:', passphrase_length
 
 # write over the results in memory to prevent future discovery
 rolls = ''.join([str(r.randint(1,6)) for n in range(num)])
-
-
-
-
